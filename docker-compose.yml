@@ -11,11 +11,14 @@ services:
     networks:
       - traefik
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.foodfront.rule=Host(`food.se.215sozvezdie.ru`)
-      - traefik.http.routers.foodfront.entrypoints=https
-      - traefik.http.routers.foodfront.tls.certresolver=letsEncrypt
-      - traefik.http.services.foodfront.loadbalancer.server.port=80
+      - "traefik.enable=true"
+      - "traefik.http.routers.foodfront.tls=true"
+      - "traefik.http.routers.foodfront.tls.options=default"
+      - "traefik.http.routers.foodfront.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.foodfront.rule=Host(`food.se.215sozvezdie.ru`)"
+      - "traefik.http.services.foodfront.loadbalancer.server.port=80"
+      - "traefik.http.routers.foodfront.entryPoints=http,https"
+      - "traefik.docker.network=traefik"
     environment:
       - NODE_ENV=production
 
