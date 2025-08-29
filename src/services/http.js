@@ -1,4 +1,4 @@
-const API_BASE_URL = '/api'
+const API_BASE_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE) || '/api'
 
 function getAuthToken() {
   return localStorage.getItem('access_token') || ''

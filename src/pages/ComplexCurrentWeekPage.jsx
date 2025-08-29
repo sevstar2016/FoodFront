@@ -8,7 +8,10 @@ export default function ComplexCurrentWeekPage() {
 
   useEffect(() => {
     getCurrentWeekComplexes()
-      .then(setData)
+      .then((res) => {
+        if (res && typeof res === 'object') setData(res)
+        else setError('Некорректный ответ сервера')
+      })
       .catch(err => setError(err?.data || 'Ошибка загрузки'))
       .finally(() => setLoading(false))
   }, [])
@@ -17,9 +20,9 @@ export default function ComplexCurrentWeekPage() {
   if (error) return <div className="container" style={{ color: 'red' }}>{String(error)}</div>
 
   return (
-    <div className="container">
-      <h1>Текущая неделя</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div className="profile">
+      <h4 className="head_complex_week">Текущая неделя</h4>
+      {/* Здесь будет табличное/списочное отображение комплексов; пока скрываем отладочный вывод */}
     </div>
   )
 }

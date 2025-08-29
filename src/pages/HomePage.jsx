@@ -1,13 +1,27 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { getMe } from '../services/api'
 
 export default function HomePage() {
   const { token } = useAuth()
   const [profile, setProfile] = useState({ name: 'Школа 215 "Созвездие"', className: '', avatarUrl: '' })
 
   useEffect(() => {
-    // Hook up real /api/me when available; for now keep placeholder
-  }, [token])
+    async function load() {
+      try {
+        const me = await getMe()
+        const fullName = [me?.lastname, me?.name].filter(Boolean).join(' ')
+        setProfile({
+          name: fullName || profile.name,
+          className: me?.class ? `Ученик, класс ${me.class.number}${me.class.letter || ''}` : '',
+          avatarUrl: me?.avatar_url || me?.avatarUrl || '',
+        })
+      } catch (_) {
+        // ignore; keep defaults
+      }
+    }
+    if (token) load()
+  }, [profile.name, token])
 
   return (
     <div className="profile">
@@ -57,7 +71,7 @@ export default function HomePage() {
             </svg>
           </div>
         </a>
-        <a href="/auth/sign-in" onClick={e => { e.preventDefault(); window.dispatchEvent(new Event('quit')) }}>
+        <a href="/auth/sign-in" onClick={e => { e.preventDefault(); localStorage.removeItem('access_token'); window.location.href = '/auth/sign-in' }}>
           <div className="menu_buttons menu_buttons_exit">
             <p>Выйти</p>
             <svg className="list" width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">

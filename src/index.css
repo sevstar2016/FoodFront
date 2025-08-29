@@ -1273,3 +1273,23 @@ nav {
   align-items: center;
   font-size: 100px;
 }
+
+/* global centering */
+.main_container,
+.profile,
+.profile_sign_in,
+.menu_choice,
+.all_menu,
+.all_korz,
+.interesting_block,
+.profile_interesting_page,
+.profile_complex {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.head,
+.head_complex_week,
+.profile_complex_day {
+  text-align: center;
+}

@@ -8,6 +8,8 @@ export async function registerUser(payload) {
   })
 }
 
+export const getMe = () => httpRequest('/auth/me')
+
 // Users
 export const listUsers = () => httpRequest('/users/')
 export const getUser = (id) => httpRequest(`/users/${id}`)

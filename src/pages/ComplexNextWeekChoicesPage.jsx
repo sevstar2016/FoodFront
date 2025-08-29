@@ -39,11 +39,11 @@ export default function ComplexNextWeekChoicesPage() {
     }
   }
 
-  if (loading) return <div className="container">Загрузка...</div>
-  if (error) return <div className="container" style={{ color: 'red' }}>{String(error)}</div>
+  if (loading) return <div className="profile">Загрузка...</div>
+  if (error) return <div className="profile" style={{ color: 'red' }}>{String(error)}</div>
 
   return (
-    <div className="container">
+    <div className="profile">
       <h1>Выбор на следующую неделю</h1>
       <div style={{ display: 'grid', gap: 16 }}>
         {weekdays.map((name, i) => {

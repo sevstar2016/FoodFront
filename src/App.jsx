@@ -8,8 +8,12 @@ function App() {
 
   function onQuit(e) {
     e.preventDefault()
-    setToken('')
-    window.location.replace('/auth/sign-in')
+    try {
+      localStorage.removeItem('access_token')
+      setToken('')
+    } finally {
+      window.location.href = '/auth/sign-in'
+    }
   }
 
   const isSignIn = location.pathname.startsWith('/auth')

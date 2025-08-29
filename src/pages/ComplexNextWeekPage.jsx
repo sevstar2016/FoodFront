@@ -8,7 +8,10 @@ export default function ComplexNextWeekPage() {
 
   useEffect(() => {
     getNextWeekComplexes()
-      .then(setData)
+      .then((res) => {
+        if (res && typeof res === 'object') setData(res)
+        else setError('Некорректный ответ сервера')
+      })
       .catch(err => setError(err?.data || 'Ошибка загрузки'))
       .finally(() => setLoading(false))
   }, [])
@@ -17,9 +20,8 @@ export default function ComplexNextWeekPage() {
   if (error) return <div className="container" style={{ color: 'red' }}>{String(error)}</div>
 
   return (
-    <div className="container">
-      <h1>Следующая неделя</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div className="profile">
+      <h4 className="head_complex_week">Следующая неделя</h4>
     </div>
   )
 }
