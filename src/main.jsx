@@ -20,6 +20,8 @@ import HelpPage from './pages/HelpPage.jsx'
 import QuestionsPage from './pages/QuestionsPage.jsx'
 import InterestingPage from './pages/InterestingPage.jsx'
 import InterestingArticlePage from './pages/InterestingArticlePage.jsx'
+import ComplexThisWeekPage from './pages/ComplexThisWeekPage.jsx'
+import ComplexNextWeekStaticPage from './pages/ComplexNextWeekStaticPage.jsx'
 
 const router = createBrowserRouter([
   { path: '/auth/sign-in', element: <SignInPage /> },
@@ -44,6 +46,8 @@ const router = createBrowserRouter([
           { path: 'complex/current-week', element: <ComplexCurrentWeekPage /> },
           { path: 'complex/next-week', element: <ComplexNextWeekPage /> },
           { path: 'complex/next-week/choices', element: <ComplexNextWeekChoicesPage /> },
+          { path: 'complex/static/current', element: <ComplexThisWeekPage /> },
+          { path: 'complex/static/next', element: <ComplexNextWeekStaticPage /> },
         ],
       },
     ],
