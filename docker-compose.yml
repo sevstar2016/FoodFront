@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: foodfront:latest
+    container_name: foodfront
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.foodfront.rule=Host(`food.se.215sozvezdie.ru`)
+      - traefik.http.routers.foodfront.entrypoints=https
+      - traefik.http.routers.foodfront.tls.certresolver=letsEncrypt
+      - traefik.http.services.foodfront.loadbalancer.server.port=80
+    environment:
+      - NODE_ENV=production
+
+networks:
+  traefik:
+    external: true
+
