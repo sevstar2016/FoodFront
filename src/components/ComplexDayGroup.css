@@ -1,0 +1,45 @@
+.complex-day-group {
+  margin-bottom: 30px;
+}
+
+.complex-day-title {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.complex-cards-container {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 15px; /* Пространство для скроллбара */
+  gap: 16px; /* Расстояние между карточками */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Для плавного скролла на iOS */
+}
+
+/* Стилизация скроллбара */
+.complex-cards-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.complex-cards-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.complex-cards-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.complex-cards-container::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Обеспечиваем, чтобы карточки не сжимались */
+.complex-cards-container .complex-card {
+  flex: 0 0 auto;
+  width: 280px; /* Фиксированная ширина карточки */
+  margin-bottom: 0; /* Отменяем margin-bottom из ComplexCard.css */
+}

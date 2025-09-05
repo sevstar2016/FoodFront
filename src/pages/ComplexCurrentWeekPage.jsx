@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
-import { getCurrentWeekComplexes } from '../services/api'
+import { getCurrentWeekChoices } from '../services/api'
+import ComplexDayGroup from '../components/ComplexDayGroup'
+import '../components/ComplexCard.css'
+import '../components/ComplexWeek.css'
 
 export default function ComplexCurrentWeekPage() {
   const [data, setData] = useState(null)
@@ -7,7 +10,7 @@ export default function ComplexCurrentWeekPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getCurrentWeekComplexes()
+    getCurrentWeekChoices()
       .then((res) => {
         if (res && typeof res === 'object') setData(res)
         else setError('Некорректный ответ сервера')
@@ -19,10 +22,25 @@ export default function ComplexCurrentWeekPage() {
   if (loading) return <div className="container">Загрузка...</div>
   if (error) return <div className="container" style={{ color: 'red' }}>{String(error)}</div>
 
+  // Получаем все доступные ID дней недели из данных
+  const weekdayIds = data ? Object.keys(data).map(Number).sort((a, b) => a - b) : []
+
   return (
     <div className="profile">
       <h4 className="head_complex_week">Текущая неделя</h4>
-      {/* Здесь будет табличное/списочное отображение комплексов; пока скрываем отладочный вывод */}
+      <div className="complex-week-container">
+        {weekdayIds.length > 0 ? (
+          weekdayIds.map((weekdayId) => (
+            <ComplexDayGroup 
+              key={weekdayId} 
+              complexes={data[weekdayId]} 
+              weekdayId={weekdayId} 
+            />
+          ))
+        ) : (
+          <p className="no-complexes">Нет доступных комплексов на текущую неделю</p>
+        )}
+      </div>
     </div>
   )
 }

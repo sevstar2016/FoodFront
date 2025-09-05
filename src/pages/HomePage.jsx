@@ -32,7 +32,8 @@ export default function HomePage() {
         <svg className="rectangle2" width="123" height="114" viewBox="0 0 123 114" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M32.9894 55.4194C21.2675 17.9657 88.0605 36.2093 88.0605 36.2093L91.9731 45.3191C91.9731 45.3191 59.2152 106.32 40.1241 72.0311C36.7256 65.9272 35.0761 62.0867 32.9894 55.4194Z" fill="#FF6C4A" fillOpacity="0.64"/>
         </svg>
-        <div className="profile_photo" id="profile_photo" style={{ backgroundImage: `url(${profile.avatarUrl || '/img/old/infophoto.png'})` }}></div>
+        {/* <div className="profile_photo"  style={{ backgroundImage: `url(${profile.avatarUrl || '/img/old/infophoto.png'})` }}></div> */}
+        <img id="profile_photo" src={profile.avatarUrl || '/img/old/infophoto.png'} className="profile_photo"/>
         <div className="profile_name">
           <h4 id="nameP" name="nameP">{profile.name}</h4>
           <h5 id="className" name="className">{profile.className}</h5>
