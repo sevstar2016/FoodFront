@@ -17,6 +17,8 @@ export default function SignInPage() {
       window.location.replace('/')
     } catch (err) {
       setError('Неверный логин или пароль')
+      // Удаляем токен из localStorage при неуспешной авторизации
+      setToken('')
     }
   }
 

@@ -21,14 +21,27 @@ export async function httpRequest(path, options = {}) {
     body: options.body,
   })
 
-  const contentType = response.headers.get('content-type') || ''
-  const data = contentType.includes('application/json') ? await response.json() : await response.text()
   if (!response.ok) {
+    // Если получили ошибку авторизации (401), удаляем токен
+    if (response.status === 401) {
+      setAuthToken('')
+      const error = new Error('Unauthorized')
+      error.status = response.status
+      throw error
+    }
+    
+    // Для других ошибок пытаемся получить данные
+    const contentType = response.headers.get('content-type') || ''
+    const data = contentType.includes('application/json') ? await response.json() : await response.text()
     const error = new Error('HTTP error')
     error.status = response.status
     error.data = data
     throw error
   }
+  
+  // Если ответ успешный, получаем данные
+  const contentType = response.headers.get('content-type') || ''
+  const data = contentType.includes('application/json') ? await response.json() : await response.text()
   return data
 }
 
